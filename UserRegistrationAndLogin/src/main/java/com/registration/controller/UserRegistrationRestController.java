@@ -55,6 +55,7 @@ public class UserRegistrationRestController {
 		String email = user.getEmail();
 		String password = user.getPassword();
 		User users=null;
+		
 		if(email !=null && password !=null) {
 			 users= service.fetchEmailAndPassword(email, password);		
 			}	
@@ -84,5 +85,6 @@ public class UserRegistrationRestController {
 		return service.getOtp(findByUserEmail, email, otp);
 	
 	}
+
 
 }
