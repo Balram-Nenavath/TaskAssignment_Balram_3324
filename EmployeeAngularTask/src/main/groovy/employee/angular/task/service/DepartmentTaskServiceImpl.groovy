@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 import employee.angular.task.entity.Department
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 import employee.angular.task.exception.DepartmentNotFoundException
 import employee.angular.task.repository.DepartmentRepository
 import employee.angular.task.repository.EmployeeTaskRepository

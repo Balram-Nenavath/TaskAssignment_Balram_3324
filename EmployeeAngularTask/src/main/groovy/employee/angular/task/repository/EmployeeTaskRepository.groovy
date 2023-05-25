@@ -6,14 +6,14 @@ import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 
 import employee.angular.task.entity.Department
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 
 @Repository
-public interface EmployeeTaskRepository extends JpaRepository<EmployeeTask,Integer>{
+interface EmployeeTaskRepository extends JpaRepository<Employee,Integer>{
 
-	Optional<EmployeeTask> findByName(String employeeName)
+	Optional<Employee> findByName(String employeeName)
 	
-	@Query("SELECT e FROM EmployeeTask e JOIN e.department d WHERE d=:department")
-	List<EmployeeTask> findAllByDepartments(@Param("department")Department department)
+	@Query("SELECT e FROM Employee e JOIN e.department d WHERE d=:department")
+	List<Employee> findAllByDepartments(@Param("department")Department department)
 
 }

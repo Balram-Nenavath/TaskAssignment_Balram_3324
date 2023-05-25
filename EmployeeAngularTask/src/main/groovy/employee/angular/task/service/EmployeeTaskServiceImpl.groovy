@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 import employee.angular.task.entity.Department
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 import employee.angular.task.exception.DepartmentNotFoundException
 import employee.angular.task.exception.EmployeeNotFoundException
 import employee.angular.task.repository.DepartmentRepository
@@ -17,25 +17,25 @@ import employee.angular.task.repository.EmployeeTaskRepository
 class EmployeeTaskServiceImpl implements EmployeeTaskService{
 
 	@Autowired
-	private EmployeeTaskRepository employeeTaskRepository
+	 EmployeeTaskRepository employeeTaskRepository
 	
 	@Autowired
-	private DepartmentTaskService departmentTaskService
+	 DepartmentTaskService departmentTaskService
 	@Autowired
-	private DepartmentRepository departmentRepository
+	 DepartmentRepository departmentRepository
 	
-	public EmployeeTaskServiceImpl(EmployeeTaskRepository employeeTaskRepository, DepartmentTaskService departmentTaskService) {
+	 EmployeeTaskServiceImpl(EmployeeTaskRepository employeeTaskRepository, DepartmentTaskService departmentTaskService) {
 		this.employeeTaskRepository = employeeTaskRepository
 		this.departmentTaskService = departmentTaskService
 	}
 
-	private static final Logger logger = LoggerFactory.getLogger(EmployeeTaskServiceImpl.class)
+	 static final Logger logger = LoggerFactory.getLogger(EmployeeTaskServiceImpl.class)
 
 
 	@Override
-	EmployeeTask findEmployeeById(Integer employeeId) {
+	Employee findEmployeeById(Integer employeeId) {
 		logger.info("Fetching task with id: $employeeId")
-		Optional<EmployeeTask> employee = employeeTaskRepository.findById(employeeId)
+		Optional<Employee> employee = employeeTaskRepository.findById(employeeId)
 	
 		return employee.orElseThrow { new EmployeeNotFoundException("Employee not found for Id: $employeeId") }
 	}
@@ -56,7 +56,7 @@ class EmployeeTaskServiceImpl implements EmployeeTaskService{
 	
 	
 	@Override
-	EmployeeTask saveEmployee(EmployeeTask employee, Integer departmentId) {
+	Employee saveEmployee(Employee employee, Integer departmentId) {
 		Optional<Department> optDepartment = departmentRepository.findById(departmentId)
 	
 		return optDepartment.map { department ->
@@ -69,9 +69,9 @@ class EmployeeTaskServiceImpl implements EmployeeTaskService{
 	
 	
 	@Override
-	List<EmployeeTask> findAllEmployees() {
+	List<Employee> findAllEmployees() {
 		logger.info("Fetching all Tasks!")
-		List<EmployeeTask> emps = employeeTaskRepository.findAll()
+		List<Employee> emps = employeeTaskRepository.findAll()
 		return emps?.collect() ?: (new EmployeeNotFoundException("No records found in DB"))
 		
 	}
@@ -79,16 +79,16 @@ class EmployeeTaskServiceImpl implements EmployeeTaskService{
 
 	
 	@Override
-	EmployeeTask findEmployeeByName(String employeeName) {
+	Employee findEmployeeByName(String employeeName) {
 		logger.info("Fetching task with id: ${employeeTaskRepository.findByName(employeeName)}")
-		Optional<EmployeeTask> employee = employeeTaskRepository.findByName(employeeName)
+		Optional<Employee> employee = employeeTaskRepository.findByName(employeeName)
 		return employee.orElseThrow { new EmployeeNotFoundException("Employee not found for Name: $employeeName") }
 	}
 	
 	
 	@Override
-	EmployeeTask updateEmployee(Integer employeeId, EmployeeTask employeeDetails) {
-		Optional<EmployeeTask> employee = employeeTaskRepository.findById(employeeId)
+	Employee updateEmployee(Integer employeeId, Employee employeeDetails) {
+		Optional<Employee> employee = employeeTaskRepository.findById(employeeId)
 		if (employee.isEmpty()) {
 			throw new EmployeeNotFoundException("Employee not found for this id :: $employeeId")
 		}
@@ -112,7 +112,7 @@ class EmployeeTaskServiceImpl implements EmployeeTaskService{
 			}
 		}
 	
-		final EmployeeTask updatedEmployee = employeeTaskRepository.save(employee.get())
+		final Employee updatedEmployee = employeeTaskRepository.save(employee.get())
 		return updatedEmployee
 	}
 	

@@ -8,21 +8,21 @@ import javax.validation.Valid
 
 import org.springframework.http.ResponseEntity
 
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 import employee.angular.task.exception.EmployeeNotFoundException
 
-public interface EmployeeTaskService {
+ interface EmployeeTaskService {
 
-	EmployeeTask findEmployeeById(Integer employeeId)
+	Employee findEmployeeById(Integer employeeId)
 	
-	EmployeeTask findEmployeeByName(String employeeName)
+	Employee findEmployeeByName(String employeeName)
 
 	boolean deleteEmployee(Integer employeeId)
 
-	EmployeeTask saveEmployee(EmployeeTask employee, Integer departmentId)
+	Employee saveEmployee(Employee employee, Integer departmentId)
 
-	List<EmployeeTask> findAllEmployees()
+	List<Employee> findAllEmployees()
 
-	EmployeeTask updateEmployee(Integer employeeId, EmployeeTask employeeDetails)
+	Employee updateEmployee(Integer employeeId, Employee employeeDetails)
 	
 }

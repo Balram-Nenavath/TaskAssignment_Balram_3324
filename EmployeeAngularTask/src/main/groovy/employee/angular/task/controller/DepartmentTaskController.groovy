@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController;
 
 import employee.angular.task.entity.Department;
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 import employee.angular.task.service.DepartmentTaskService
 @CrossOrigin('${crossorigin}')
 @RestController

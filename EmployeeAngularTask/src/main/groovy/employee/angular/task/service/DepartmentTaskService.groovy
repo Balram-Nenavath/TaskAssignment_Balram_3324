@@ -3,9 +3,9 @@ package employee.angular.task.service;
 import java.util.List;
 
 import employee.angular.task.entity.Department;
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 
-public interface DepartmentTaskService {
+ interface DepartmentTaskService {
 	
 
 

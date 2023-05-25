@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc
 
 import com.fasterxml.jackson.databind.ObjectMapper
 
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 import employee.angular.task.service.EmployeeTaskService
 
 @ExtendWith(SpringExtension.class)
@@ -42,7 +42,7 @@ public class EmployeeTaskControllerTest {
 	
 	@Test
 	public void testGetAllEmployees() throws Exception {
-		List<EmployeeTask> employeeList = new ArrayList<>()
+		List<Employee> employeeList = new ArrayList<>()
 
 		when(employeeTaskService.findAllEmployees()).thenReturn(employeeList)
 
@@ -54,7 +54,7 @@ public class EmployeeTaskControllerTest {
 	@Test
 	public void testGetEmployeeById() throws Exception {
 		int employeeId = 1
-		EmployeeTask employee = new EmployeeTask()
+		Employee employee = new Employee()
 
 		when(employeeTaskService.findEmployeeById(employeeId)).thenReturn(employee)
 
@@ -67,7 +67,7 @@ public class EmployeeTaskControllerTest {
 	@Test
 	public void testGetEmployeeByName() throws Exception {
 		String employeeName = "Balram"
-		EmployeeTask employee = new EmployeeTask()
+		Employee employee = new Employee()
 
 		when(employeeTaskService.findEmployeeByName(employeeName)).thenReturn(employee)
 
@@ -80,10 +80,10 @@ public class EmployeeTaskControllerTest {
 
 	@Test
 	void testAddEmployee() throws Exception {
-		EmployeeTask savedEmployee = new EmployeeTask()
+		Employee savedEmployee = new Employee()
 		savedEmployee.setId(1)
 		savedEmployee.setName("Ram")
-		when(employeeTaskService.saveEmployee(any(EmployeeTask.class), anyInt())).thenReturn(savedEmployee)
+		when(employeeTaskService.saveEmployee(any(Employee.class), anyInt())).thenReturn(savedEmployee)
 
 		String requestContent = "{\"name\":\"Ram\",\"emailId\":\"ram@gmail.com\",\"designation\":\"TA\",\"salary\":\"25000.00\",\"doj\":\"2022-06-02\",\"employees\":\"[1]\"}"
 
@@ -93,7 +93,7 @@ public class EmployeeTaskControllerTest {
 				.param("departmentId", "123"))
 				.andExpect(status().isOk())
 
-		verify(employeeTaskService).saveEmployee(any(EmployeeTask.class), eq(123))
+		verify(employeeTaskService).saveEmployee(any(Employee.class), eq(123))
 	}
 
 	@Test
@@ -110,9 +110,9 @@ public class EmployeeTaskControllerTest {
 	@Test
 	public void testUpdateEmployee() throws Exception {
 		int employeeId = 1
-		EmployeeTask employee = new EmployeeTask()
+		Employee employee = new Employee()
 
-		when(employeeTaskService.updateEmployee(eq(employeeId), any(EmployeeTask.class))).thenReturn(employee)
+		when(employeeTaskService.updateEmployee(eq(employeeId), any(Employee.class))).thenReturn(employee)
 		String requestContent = "{\"name\":\"Ram\",\"emailId\":\"ram@gmail.com\",\"designation\":\"TA\",\"salary\":\"25000.00\",\"doj\":\"2022-06-02\",\"employees\":\"[1]\"}"
 		
 		mockMvc.perform(put("/employees/updateEmployee/{id}", employeeId)
@@ -121,6 +121,6 @@ public class EmployeeTaskControllerTest {
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 
-		verify(employeeTaskService, times(1)).updateEmployee(eq(employeeId), any(EmployeeTask.class))
+		verify(employeeTaskService, times(1)).updateEmployee(eq(employeeId), any(Employee.class))
 	}
 }

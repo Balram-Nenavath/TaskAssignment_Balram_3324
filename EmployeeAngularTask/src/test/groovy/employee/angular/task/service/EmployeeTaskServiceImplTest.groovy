@@ -15,7 +15,7 @@ import java.util.List
 import java.util.Optional
 
 import employee.angular.task.entity.Department
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 import employee.angular.task.exception.DepartmentNotFoundException
 import employee.angular.task.exception.EmployeeNotFoundException
 import employee.angular.task.repository.DepartmentRepository
@@ -43,10 +43,10 @@ class EmployeeTaskServiceImplTest {
 	@Test
 	void testFindEmployeeById() {
 		Integer employeeId = 1
-		EmployeeTask employee = new EmployeeTask()
+		Employee employee = new Employee()
 		when(employeeTaskRepository.findById(employeeId)).thenReturn(Optional.of(employee))
 
-		EmployeeTask result = employeeTaskService.findEmployeeById(employeeId)
+		Employee result = employeeTaskService.findEmployeeById(employeeId)
 
 		assertEquals(employee, result)
 	}
@@ -62,7 +62,7 @@ class EmployeeTaskServiceImplTest {
 	@Test
 	void testDeleteEmployee() {
 		Integer employeeId = 1
-		EmployeeTask existingTask = new EmployeeTask()
+		Employee existingTask = new Employee()
 		when(employeeTaskRepository.findById(employeeId)).thenReturn(Optional.of(existingTask))
 
 		boolean result = employeeTaskService.deleteEmployee(employeeId)
@@ -74,7 +74,7 @@ class EmployeeTaskServiceImplTest {
 
 	@Test
 	void testSaveEmployee() {
-		EmployeeTask employee = new EmployeeTask()
+		Employee employee = new Employee()
 		Integer departmentId = 1
 		Department department = new Department()
 		department.setId(departmentId)
@@ -82,7 +82,7 @@ class EmployeeTaskServiceImplTest {
 		when(departmentRepository.findById(departmentId)).thenReturn(optDepartment)
 		when(employeeTaskRepository.save(employee)).thenReturn(employee)
 
-		EmployeeTask result = employeeTaskService.saveEmployee(employee, departmentId)
+		Employee result = employeeTaskService.saveEmployee(employee, departmentId)
 
 		assertEquals(employee, result)
 		assertTrue(employee.getDepartment().contains(department))
@@ -92,12 +92,12 @@ class EmployeeTaskServiceImplTest {
 
 	@Test
 	void testFindAllEmployees() {
-		List<EmployeeTask> employees = new ArrayList<>()
-		employees.add(new EmployeeTask())
-		employees.add(new EmployeeTask())
+		List<Employee> employees = new ArrayList<>()
+		employees.add(new Employee())
+		employees.add(new Employee())
 		when(employeeTaskRepository.findAll()).thenReturn(employees)
 
-		List<EmployeeTask> result = employeeTaskService.findAllEmployees()
+		List<Employee> result = employeeTaskService.findAllEmployees()
 
 		assertEquals(employees, result)
 	}
@@ -105,10 +105,10 @@ class EmployeeTaskServiceImplTest {
 	@Test
 	void testFindEmployeeByName() {
 		String employeeName = "Ram"
-		EmployeeTask employee = new EmployeeTask()
+		Employee employee = new Employee()
 		when(employeeTaskRepository.findByName(employeeName)).thenReturn(Optional.of(employee))
 
-		EmployeeTask result = employeeTaskService.findEmployeeByName(employeeName)
+		Employee result = employeeTaskService.findEmployeeByName(employeeName)
 
 		assertEquals(employee, result)
 	}
@@ -124,14 +124,14 @@ class EmployeeTaskServiceImplTest {
 	@Test
 	void testUpdateEmployee() {
 		Integer employeeId = 1
-		EmployeeTask existingEmployee = new EmployeeTask()
+		Employee existingEmployee = new Employee()
 		existingEmployee.setEmailId("ram@example.com")
-		EmployeeTask updatedEmployeeDetails = new EmployeeTask()
+		Employee updatedEmployeeDetails = new Employee()
 		updatedEmployeeDetails.setEmailId("krish@example.com")
 		when(employeeTaskRepository.findById(employeeId)).thenReturn(Optional.of(existingEmployee))
 		when(employeeTaskRepository.save(existingEmployee)).thenReturn(existingEmployee)
 
-		EmployeeTask result = employeeTaskService.updateEmployee(employeeId, updatedEmployeeDetails)
+		Employee result = employeeTaskService.updateEmployee(employeeId, updatedEmployeeDetails)
 
 		assertEquals(existingEmployee, result)
 		assertEquals("krish@example.com", existingEmployee.getEmailId())
@@ -141,7 +141,7 @@ class EmployeeTaskServiceImplTest {
 	void testUpdateEmployee_EmployeeNotFoundException() {
 		Integer employeeId = 1
 		when(employeeTaskRepository.findById(employeeId)).thenReturn(Optional.empty())
-		EmployeeTask employeeDetails = new EmployeeTask()
+		Employee employeeDetails = new Employee()
 		assertThrows(EmployeeNotFoundException) {
 			employeeTaskService.updateEmployee(employeeId,employeeDetails)}
 	}

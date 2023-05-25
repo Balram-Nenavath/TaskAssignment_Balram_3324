@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 import employee.angular.task.entity.Department
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department,Integer>{
+interface DepartmentRepository extends JpaRepository<Department,Integer>{
 
 }

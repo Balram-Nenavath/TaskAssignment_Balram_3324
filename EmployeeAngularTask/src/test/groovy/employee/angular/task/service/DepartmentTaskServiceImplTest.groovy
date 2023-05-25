@@ -11,7 +11,7 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 import employee.angular.task.entity.Department
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 import employee.angular.task.exception.DepartmentNotFoundException
 import employee.angular.task.repository.DepartmentRepository
 import employee.angular.task.repository.EmployeeTaskRepository
@@ -37,8 +37,8 @@ class DepartmentTaskServiceImplTest {
         Integer departmentId = 1
         Department department = new Department()
         department.setId(departmentId)
-        List<EmployeeTask> employees = new ArrayList<>()
-        employees.add(new EmployeeTask())
+        List<Employee> employees = new ArrayList<>()
+        employees.add(new Employee())
         department.setEmployees(employees)
 
         when(departmentRepository.findById(departmentId)).thenReturn(Optional.of(department))

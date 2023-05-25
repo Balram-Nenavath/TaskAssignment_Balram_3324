@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-import employee.angular.task.entity.EmployeeTask
+import employee.angular.task.entity.Employee
 import employee.angular.task.exception.EmployeeNotFoundException
 import employee.angular.task.service.EmployeeTaskService
 
@@ -35,27 +35,27 @@ public class EmployeeTaskController {
 	EmployeeTaskService employeeTaskService
 
 	@GetMapping('/all')
-	List<EmployeeTask> getAllEmployees() {
+	List<Employee> getAllEmployees() {
 		return employeeTaskService.findAllEmployees()
 	}
 
 	@GetMapping('/getById/{id}')
-	ResponseEntity<EmployeeTask> getEmployeeById(@PathVariable(value = 'id') Integer employeeId)
+	ResponseEntity<Employee> getEmployeeById(@PathVariable(value = 'id') Integer employeeId)
 			 {
-		EmployeeTask employee = employeeTaskService.findEmployeeById(employeeId)
+		Employee employee = employeeTaskService.findEmployeeById(employeeId)
 		return ResponseEntity.ok().body(employee)
 	}
 	
 	@GetMapping('getByName/{name}')
-	ResponseEntity<EmployeeTask> getEmployeeByName(@PathVariable(value = 'name') String employeeName)
+	ResponseEntity<Employee> getEmployeeByName(@PathVariable(value = 'name') String employeeName)
 			{
-		EmployeeTask employee = employeeTaskService.findEmployeeByName(employeeName)
+		Employee employee = employeeTaskService.findEmployeeByName(employeeName)
 		return ResponseEntity.ok().body(employee)
 	}
 
 	@PostMapping('/addEmployee')
-	ResponseEntity<EmployeeTask> createEmployee(@Valid @RequestBody EmployeeTask employee, @RequestParam Integer departmentId) {
-		EmployeeTask empl = employeeTaskService.saveEmployee(employee,departmentId)
+	ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee, @RequestParam Integer departmentId) {
+		Employee empl = employeeTaskService.saveEmployee(employee,departmentId)
 		return ResponseEntity.ok().body(empl)
 	}
 
@@ -69,8 +69,8 @@ public class EmployeeTaskController {
 	}
 
 	@PutMapping('/updateEmployee/{id}')
-	ResponseEntity<EmployeeTask> updateEmployee(@PathVariable(value = 'id') Integer employeeId, @Valid @RequestBody EmployeeTask employeeDetails) {
-		EmployeeTask employee = employeeTaskService.updateEmployee(employeeId, employeeDetails)
+	ResponseEntity<Employee> updateEmployee(@PathVariable(value = 'id') Integer employeeId, @Valid @RequestBody Employee employeeDetails) {
+		Employee employee = employeeTaskService.updateEmployee(employeeId, employeeDetails)
 		return ResponseEntity.ok().body(employee)
 	}
 	
